@@ -1,0 +1,85 @@
+{
+  "schema": "x402-directory/1",
+  "generated": "2026-10-06",
+  "network": "eip155:8453",
+  "asset": {
+    "symbol": "USDC",
+    "address": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+  },
+  "payTo": "0xc9d0ab76b5e9cbe3da320347ccdaa111e515e6d0",
+  "x402Version": 2,
+  "services": [
+    {
+      "name": "Token Safe Verdict",
+      "title": "ERC-20 token safety verdict on Base",
+      "description": "Paid one-call safety verdict for a Base ERC-20 address: live USDC and ETH balances, token metadata, an explicit risk list, and a verdict of no_flags or review_recommended.",
+      "origin": "https://tokensafe.x402api.workers.dev",
+      "resource": "https://tokensafe.x402api.workers.dev/api/probe",
+      "method": "GET",
+      "price": {
+        "amount": "5000",
+        "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+        "usd": 0.005,
+        "decimals": 6
+      },
+      "scheme": "exact",
+      "maxTimeoutSeconds": 60,
+      "paymentHeader": "X-PAYMENT",
+      "manifests": {
+        "x402": "https://tokensafe.x402api.workers.dev/.well-known/x402",
+        "agents": "https://tokensafe.x402api.workers.dev/agents.json",
+        "openapi": "https://tokensafe.x402api.workers.dev/openapi.json",
+        "llms": "https://tokensafe.x402api.workers.dev/llms.txt",
+        "health": "https://tokensafe.x402api.workers.dev/health"
+      }
+    },
+    {
+      "name": "x402 Rail Audit",
+      "title": "x402 payment-rail liveness audit",
+      "description": "Paid x402 payment-rail audit on Base: probes the facilitators that can settle x402 payments right now (liveness, latency, advertised kinds) plus Base RPC reachability, and returns one verdict: usable, no_facilitator_available or chain_unreachable.",
+      "origin": "https://railaudit.x402api.workers.dev",
+      "resource": "https://railaudit.x402api.workers.dev/audit",
+      "method": "GET",
+      "price": {
+        "amount": "10000",
+        "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+        "usd": 0.01,
+        "decimals": 6
+      },
+      "scheme": "exact",
+      "maxTimeoutSeconds": 60,
+      "paymentHeader": "X-PAYMENT",
+      "manifests": {
+        "x402": "https://railaudit.x402api.workers.dev/.well-known/x402",
+        "agents": "https://railaudit.x402api.workers.dev/agents.json",
+        "openapi": "https://railaudit.x402api.workers.dev/openapi.json",
+        "llms": "https://railaudit.x402api.workers.dev/llms.txt",
+        "health": "https://railaudit.x402api.workers.dev/health"
+      }
+    },
+    {
+      "name": "Slippage",
+      "title": "Uniswap V2 pool slippage and price-impact simulation",
+      "description": "Paid swap simulation for a Uniswap V2 pool on Base: reads getReserves() and token decimals on chain, then returns amount out, execution ratio and slippage percent against the pool's own spot rate, with a verdict of acceptable or expensive_route.",
+      "origin": "https://slippage.x402api.workers.dev",
+      "resource": "https://slippage.x402api.workers.dev/slip",
+      "method": "GET",
+      "price": {
+        "amount": "5000",
+        "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+        "usd": 0.005,
+        "decimals": 6
+      },
+      "scheme": "exact",
+      "maxTimeoutSeconds": 60,
+      "paymentHeader": "X-PAYMENT",
+      "manifests": {
+        "x402": "https://slippage.x402api.workers.dev/.well-known/x402",
+        "agents": "https://slippage.x402api.workers.dev/agents.json",
+        "openapi": "https://slippage.x402api.workers.dev/openapi.json",
+        "llms": "https://slippage.x402api.workers.dev/llms.txt",
+        "health": "https://slippage.x402api.workers.dev/health"
+      }
+    }
+  ]
+}

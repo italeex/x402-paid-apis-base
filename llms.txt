@@ -1,0 +1,29 @@
+# Paid x402 APIs on Base
+
+Three production HTTP 402 endpoints. No API key, no account, no email.
+Pay per request in USDC on Base mainnet (eip155:8453).
+
+## Endpoints
+
+- https://tokensafe.x402api.workers.dev/api/probe — ERC-20 token safety verdict on Base. $0.005 per call.
+  Manifests (free, no auth): https://tokensafe.x402api.workers.dev/.well-known/x402 , /agents.json , /openapi.json , /llms.txt
+  Paid one-call safety verdict for a Base ERC-20 address: live USDC and ETH balances, token metadata, an explicit risk list, and a verdict of no_flags or review_recommended.
+
+- https://railaudit.x402api.workers.dev/audit — x402 payment-rail liveness audit. $0.010 per call.
+  Manifests (free, no auth): https://railaudit.x402api.workers.dev/.well-known/x402 , /agents.json , /openapi.json , /llms.txt
+  Paid x402 payment-rail audit on Base: probes the facilitators that can settle x402 payments right now (liveness, latency, advertised kinds) plus Base RPC reachability, and returns one verdict: usable, no_facilitator_available or chain_unreachable.
+
+- https://slippage.x402api.workers.dev/slip — Uniswap V2 pool slippage and price-impact simulation. $0.005 per call.
+  Manifests (free, no auth): https://slippage.x402api.workers.dev/.well-known/x402 , /agents.json , /openapi.json , /llms.txt
+  Paid swap simulation for a Uniswap V2 pool on Base: reads getReserves() and token decimals on chain, then returns amount out, execution ratio and slippage percent against the pool's own spot rate, with a verdict of acceptable or expensive_route.
+
+## Settlement
+
+- Asset: USDC 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913
+- payTo: 0xc9d0ab76b5e9cbe3da320347ccdaa111e515e6d0
+- Scheme: exact, maxTimeoutSeconds 60, x402 v2
+
+## Discovery
+
+- agent402.tools index: all three origins listed, routable=true.
+- Register free, no account: POST https://agent402.tools/api/index/register
